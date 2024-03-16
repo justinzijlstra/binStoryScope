@@ -1,0 +1,46 @@
+#!/bin/bash
+user="${SUDO_USER:-${USER}}"
+#change the buildname to the correct build, this checks the folder path
+#place this script in /home/jzbin
+BUILD_NAME=""
+
+
+sudo rm /home/$user/.config/autostart/*
+
+sudo touch /home/$user/.config/autostart/runStoryScope.desktop
+sudo touch /home/$user/.config/autostart/runReactivision.desktop
+
+pathS=/home/$user/.config/autostart/runStoryScope.desktop
+pathR=/home/$user/.config/autostart/runReactivision.desktop
+
+echo "reactivision startup"
+
+sudo echo "[Desktop Entry]" >> $pathR
+sudo echo "Type=Application" >> $pathR
+sudo echo "Exec=/bin/reacTIVision" >> $pathR
+sudo echo "Hidden=false" >> $pathR
+sudo echo "NoDisplay=false" >> $pathR
+sudo echo "X-GNOME-Autostart-enabled=true" >> $pathR
+sudo echo "Name[en_US]=reacTIVision" >> $pathR
+sudo echo "Name=reacTIVision" >> $pathR
+sudo echo "Comment[en_US]=" >> $pathR
+sudo echo "Comment=" >> $pathR
+
+
+str1='Exec=bash -c "sleep 5 && /home/InteractiveCulture/Builds/'
+str2='/StoryScope.x86_64'
+
+echo "storyscope startup"
+sudo echo "[Desktop Entry]" >> $pathS
+sudo echo "Type=Application" >> $pathS
+
+sudo echo "$str1$BUILD_NAME$str2" >> $pathS
+echo "$str1$BUILD_NAME$str2"
+
+sudo echo "Hidden=false" >> $pathS
+sudo echo "NoDisplay=false" >> $pathS
+sudo echo "X-GNOME-Autostart-enabled=true" >> $pathS
+sudo echo "Name[en_US]=StoryScope" >> $pathS
+sudo echo "Name=StoryScope" >> $pathS
+sudo echo "Comment[en_US]=" >> $pathS
+sudo echo "Comment=" >> $pathS
